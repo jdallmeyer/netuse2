@@ -1,0 +1,80 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.start_button {
+	    -fx-background-radius: 5em;
+        -fx-min-width: 50px;
+        -fx-min-height: 50px;
+        -fx-max-width: 50px;
+        -fx-max-height: 50px;
+        -fx-background-color: #08E844;
+        -fx-background-insets: 0px;
+        -fx-padding: 0px;
+}
+
+.start_button:pressed {
+		 -fx-background-radius: 5em;
+        -fx-min-width: 50px;
+        -fx-min-height: 50px;
+        -fx-max-width: 50px;
+        -fx-max-height: 50px;
+        -fx-background-color: #047D25;
+        -fx-background-insets: 0px;
+        -fx-padding: 0px;	
+}
+
+.stop_button {
+	    -fx-background-radius: 5em;
+        -fx-min-width: 50px;
+        -fx-min-height: 50px;
+        -fx-max-width: 50px;
+        -fx-max-height: 50px;
+        -fx-background-color: #EE1414;
+        -fx-background-insets: 0px;
+        -fx-padding: 0px;
+}
+
+.stop_button:pressed {
+	    -fx-background-radius: 5em;
+        -fx-min-width: 50px;
+        -fx-min-height: 50px;
+        -fx-max-width: 50px;
+        -fx-max-height: 50px;
+        -fx-background-color: #A80E0E;
+        -fx-background-insets: 0px;
+        -fx-padding: 0px;
+}
+
+.clear_button {
+	    -fx-background-radius: 5em;
+        -fx-min-width: 50px;
+        -fx-min-height: 50px;
+        -fx-max-width: 50px;
+        -fx-max-height: 50px;
+        -fx-background-color: #F5900F;
+        -fx-background-insets: 0px;
+        -fx-padding: 0px;
+}
+
+.clear_button:pressed {
+		 -fx-background-radius: 5em;
+        -fx-min-width: 50px;
+        -fx-min-height: 50px;
+        -fx-max-width: 50px;
+        -fx-max-height: 50px;
+        -fx-background-color: #C9770C;
+        -fx-background-insets: 0px;
+        -fx-padding: 0px;	
+}
+
+.text-field:error {
+  -fx-text-box-border: red ;
+  -fx-focus-color: red ;
+}
+.choice-box:error {
+  -fx-text-box-border: red ;
+  -fx-focus-color: red ;
+}
+
+.data0.chart-pie { -fx-pie-color: forestgreen; }  
+.data1.chart-pie { -fx-pie-color: firebrick; }  
+.data2.chart-pie { -fx-pie-color: sandybrown; }  
+ 

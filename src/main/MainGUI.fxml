@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<BorderPane id="rootPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainGUIController">
+   <top>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" onAction="#handleCloseItemClicked" text="Close"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Data">
+               <MenuItem mnemonicParsing="false" onAction="#savePingResults" text="Save"/>
+               <MenuItem mnemonicParsing="false" onAction="#loadData" text="Load"/>
+               <MenuItem mnemonicParsing="false" text="Reset"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+               <MenuItem mnemonicParsing="false" onAction="#showAboutDialog" text="About"/>
+               <MenuItem mnemonicParsing="false" onAction="#showHelpViewer" text="Help"/>
+           </Menu>
+       </MenuBar>
+   </top>
+   <center>
+      <BorderPane id="graphPane" fx:id="graphPane" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #CCDACD;" BorderPane.alignment="CENTER">
+         <center>
+            <LineChart fx:id="pingChart" prefHeight="575.0" prefWidth="758.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+              <xAxis>
+                <CategoryAxis label="Ping Time" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis label="Response (ms)" side="LEFT" />
+              </yAxis>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </BorderPane.margin>
+            </LineChart>
+         </center>
+         <right>
+             <SplitPane dividerPositions="0.5217391304347826" orientation="VERTICAL" prefHeight="200.0"
+                        prefWidth="160.0" BorderPane.alignment="CENTER">
+                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="400.0"
+                             style="-fx-background-color: #CCDACD;">
+                     <PieChart fx:id="avgChart" layoutX="10.0" layoutY="10.0" style="-fx-background-color: #FFFFFF;"
+                               title="Response Statistics" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                               AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
+                 </AnchorPane>
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0"
+                             style="-fx-background-color: #CCDACD;">
+                     <VBox layoutX="14.0" layoutY="14.0" style="-fx-background-color: #FFFFFF;"
+                           AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                           AnchorPane.topAnchor="20.0">
+                         <TableView fx:id="parameterTable" prefHeight="252.0" prefWidth="360.0">
+                             <columns>
+                                 <TableColumn fx:id="parameterColumn" prefWidth="169.0" resizable="false"
+                                              text="Parameter"/>
+                                 <TableColumn fx:id="valueColumn" editable="false" prefWidth="190.0"
+                                              resizable="false" sortable="false" text="Value"/>
+                             </columns>
+                             <columnResizePolicy>
+                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                             </columnResizePolicy>
+                         </TableView>
+                     </VBox>
+                 </AnchorPane>
+             </SplitPane>
+         </right>
+      </BorderPane>
+   </center>
+   <bottom>
+       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+           <Tab fx:id="analysisTab" text="Analysis">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                   <Button fx:id="autoStartButton" layoutX="21.0" layoutY="61.0" mnemonicParsing="false"
+                           onAction="#automaticPingStart" styleClass="start_button" stylesheets="@application.css"
+                           text="Go"/>
+                   <Button fx:id="autoStopButton" disable="true" layoutX="75.0" layoutY="61.0" mnemonicParsing="false"
+                           onAction="#automaticPingStop" styleClass="stop_button" stylesheets="@application.css"
+                           text="Stop"/>
+                   <TextArea fx:id="statusLog" editable="false" layoutX="208.0" layoutY="30.0" prefHeight="131.0"
+                             prefWidth="683.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="208.0"
+                             AnchorPane.rightAnchor="309.0" AnchorPane.topAnchor="30.0"/>
+                   <Label layoutX="494.0" layoutY="7.0" text="Status Log"/>
+                   <Button fx:id="autoClearButton" disable="true" layoutX="130.0" layoutY="61.0"
+                           mnemonicParsing="false" onAction="#automaticPingClear" stylesheets="@application.css"
+                           text="Clear">
+                       <styleClass>
+                           <String fx:value="stop_button"/>
+                           <String fx:value="clear_button"/>
+                       </styleClass>
+                   </Button>
+                   <TextArea fx:id="issueLog" editable="false" layoutX="904.0" layoutY="31.0" prefHeight="128.0"
+                             prefWidth="280.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0"
+                             AnchorPane.topAnchor="30.0"/>
+                   <Label layoutX="987.0" layoutY="6.0" text="Detected Issues" AnchorPane.bottomAnchor="134.0"
+                          AnchorPane.rightAnchor="109.0" AnchorPane.topAnchor="6.0"/>
+               </AnchorPane>
+           </Tab>
+           <Tab fx:id="manualTab" text="Duration">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                   <Label layoutX="40.0" layoutY="25.0" text="Target"/>
+                   <TextField fx:id="pingTarget" layoutX="112.0" layoutY="22.0" prefHeight="31.0" prefWidth="214.0"
+                              stylesheets="@application.css"/>
+                   <Label layoutX="40.0" layoutY="70.0" text="Duration"/>
+                   <TextField fx:id="pingDuration" layoutX="112.0" layoutY="65.0" prefHeight="31.0" prefWidth="47.0"/>
+                   <ChoiceBox fx:id="durationChoice" layoutX="173.0" layoutY="65.0" prefWidth="150.0"/>
+                   <Button fx:id="durationStartButton" layoutX="130.0" layoutY="101.0" mnemonicParsing="false"
+                           onAction="#durationStart" prefHeight="31.0" prefWidth="52.0" styleClass="start_button"
+                           stylesheets="@application.css" text="Go"/>
+                   <Button id="durationStopButton" fx:id="durationStopButton" disable="true" layoutX="189.0"
+                           layoutY="101.0" mnemonicParsing="false" onAction="#durationStop" styleClass="stop_button"
+                           stylesheets="@application.css" text="Stop"/>
+                   <TextArea fx:id="consoleLog" editable="false" layoutX="466.0" layoutY="13.0" prefHeight="138.0"
+                             prefWidth="719.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0"
+                             AnchorPane.topAnchor="30.0"/>
+                   <Label layoutX="768.0" layoutY="6.0" text="System Output" AnchorPane.bottomAnchor="134.0"
+                          AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="6.0"/>
+                   <Button id="durationClearButton" fx:id="durationClearButton" disable="true" layoutX="249.0"
+                           layoutY="101.0" mnemonicParsing="false" onAction="#durationClearClick"
+                           styleClass="clear_button" stylesheets="@application.css" text="Clear"/>
+               </AnchorPane>
+           </Tab>
+       </TabPane>
+   </bottom>
+</BorderPane>
